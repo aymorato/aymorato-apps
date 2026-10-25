@@ -7,7 +7,7 @@ Contact: aymorato.apps@gmail.com
 
 A static website made of plain HTML, CSS and a little JavaScript. It has no build step and no dependencies, so it runs on GitHub Pages as soon as you upload it.
 
-The homepage (`index.html`) is one self-contained file: all of its CSS and JS are inline. It includes the app showcase, screenshot gallery, the full privacy policy and the contact section. The subpages (terms, contact, apps, standalone privacy) share `css/style.css`, which uses the same colors.
+Every page shares `css/style.css` and `js/main.js`. The app cards on the homepage and on `apps/index.html` are built from `apps.json`, so a local preview needs a web server (for example VS Code Live Server); opening `index.html` straight from disk won't load the cards.
 
 **Design system:** Ink `#0F172A` · Cobalt `#1E40AF` · Amber `#F59E0B` · Backgrounds `#F8FAFC` / `#F1F5F9` · Inter font.
 
@@ -17,35 +17,35 @@ The homepage (`index.html`) is one self-contained file: all of its CSS and JS ar
 
 ```
 aymorato-apps/
-├── index.html               Homepage (hero + apps grid)
-├── privacy-policy.html      CSC Mastery privacy policy (site-level copy)
+├── index.html               Homepage (hero, trust badges, apps grid)
+├── apps.json                App list used to build the app cards
+├── privacy-policy.html      Older CSC Mastery privacy policy (kept so existing links keep working)
 ├── terms.html               Terms of Use (general, all apps)
 ├── contact.html             Contact page
 ├── .nojekyll                Tells GitHub Pages to serve files as-is
 ├── css/style.css            All styles (colors are set in :root)
-├── js/main.js               Mobile menu toggle
+├── js/main.js               Mobile menu toggle + app cards from apps.json
 ├── assets/
 │   ├── logo/
 │   │   ├── aymorato_final_colored_white_bg.png   Original logo (1600×1600)
 │   │   ├── logo-512.png     Cropped logo for large uses
 │   │   ├── logo-192.png     Header, footer, app card, apple-touch-icon
 │   │   └── logo-64.png      Favicon
-│   └── csc-mastery/
-│       ├── app_icon.png     Copied from play_store_assets/logo/app_icon_512.png
-│       ├── feature_graphic.png
-│       └── screenshots/     6 screenshots copied from play_store_assets/screenshots/
+│   ├── csc-mastery/         app_icon.png, feature_graphic.jpg, screenshots/
+│   ├── let-reviewer/        app_icon.png, feature_graphic.png, screenshots/
+│   └── gwa-calculator/      app_icon.png, feature_graphic.png, screenshots/
 └── apps/
-    ├── index.html           List of all apps
-    └── csc-mastery/
-        ├── index.html       App page (text from about_this_app.txt)
-        └── privacy.html     App privacy policy (text from privacy_policy.txt)
+    ├── index.html           List of all apps (cards from apps.json)
+    └── <id>/                csc-mastery, let-reviewer, gwa-calculator
+        ├── index.html       App page: 1 About, 2 Screenshots, 3 Privacy summary
+        └── privacy.html     "Privacy Policy for <App Name>"
 ```
 
 ### Where the content came from
 
-- The privacy policy pages copy `csc_mastery_app/play_store_assets/privacy_policy.txt` word for word. Only HTML formatting was added.
-- The CSC Mastery page text comes from `play_store_assets/about_this_app.txt`.
-- The app icon, feature graphic and all 6 screenshots were found and copied, so no image placeholders are needed.
+- All three `apps/<id>/privacy.html` pages use the same shared policy text; only the app name changes.
+- About text comes from each app's `play_store_assets` (`about_this_app.txt` / `store_listing/`).
+- Icons and screenshots were copied from each app's `play_store_assets` folder.
 - `terms.html` is a **general template** written for this site and was not in your assets. Read it and change it to suit you before you publish.
 
 ---
@@ -83,29 +83,28 @@ In **Play Console → App content → Privacy policy**, use:
 
 ```
 https://aymorato.github.io/aymorato-apps/apps/csc-mastery/privacy.html
+https://aymorato.github.io/aymorato-apps/apps/let-reviewer/privacy.html
+https://aymorato.github.io/aymorato-apps/apps/gwa-calculator/privacy.html
 ```
-
-The same text is also at `https://aymorato.github.io/aymorato-apps/privacy-policy.html`.
 
 ---
 
 ## Add a new app
 
-1. Copy `apps/csc-mastery/` to `apps/your-new-app/`.
-2. Put the new app's icon and screenshots in `assets/your-new-app/`.
+1. Copy `apps/gwa-calculator/` to `apps/your-new-app/`.
+2. Put the new app's icon at `assets/your-new-app/app_icon.png` and screenshots in `assets/your-new-app/screenshots/`.
 3. In `apps/your-new-app/index.html` and `privacy.html`, change the name, text, image paths, `<title>` and canonical URL.
-4. Add a card for it in **both** `index.html` and `apps/index.html`. Copy the block marked `<!-- APP CARD -->` and change the `href`, icon, tag (for example _Tools_, _Games_ or _Productivity_), title and description. On the homepage, delete one of the "Coming Soon" cards to make room.
-5. Commit and push. GitHub Pages updates in about a minute.
+4. Add an entry to `apps.json` (`id` must match the folder name). The cards on the homepage and the All Apps page update automatically.
+5. Add it to the `<noscript>` list in `index.html`.
+6. Commit and push. GitHub Pages updates in about a minute.
 
-## When CSC Mastery goes live on Google Play
+## When an app goes live on Google Play
 
-In `apps/csc-mastery/index.html`, find the `TODO` comment by the Play Store button. Set its `href` to your Play Store link, remove `aria-disabled="true"`, and change the label to "Get it on Google Play".
-
-On the homepage, also update the **Get CSC App →** header button (`href="#apps"`) and the disabled Google Play button in the "01 / The App" card.
+In `apps/<id>/index.html`, find the `TODO` comment by the Play Store button. Set its `href` to the Play Store link, remove `aria-disabled="true"`, and change the label to "Get it on Google Play".
 
 ## Change the theme
 
-Colors are CSS variables in two places: the `<style>` block at the top of `index.html` and the top of `css/style.css`. Change both so the subpages keep matching the homepage.
+Colors are CSS variables at the top of `css/style.css`.
 
 ---
 

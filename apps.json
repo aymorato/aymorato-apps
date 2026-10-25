@@ -1,0 +1,20 @@
+[
+  {
+    "id": "csc-mastery",
+    "name": "CSC Mastery: Exam Reviewer",
+    "badge": "Reviewer • CSC",
+    "description": "Civil Service Exam reviewer: 1,100 questions, mock exams and explanations."
+  },
+  {
+    "id": "let-reviewer",
+    "name": "LET Reviewer - LPT Board Exam",
+    "badge": "Reviewer • LET",
+    "description": "LET reviewer with 1,100 questions and rationales. Pass the board exam!"
+  },
+  {
+    "id": "gwa-calculator",
+    "name": "GWA Calculator PH",
+    "badge": "Calculator • GWA",
+    "description": "Offline GWA calculator for PH students with Latin honors and what-if grades."
+  }
+]
