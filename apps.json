@@ -12,6 +12,12 @@
     "description": "LET reviewer with 1,100 questions and rationales. Pass the board exam!"
   },
   {
+    "id": "lto-reviewer",
+    "name": "LTO Reviewer: Exam Reviewer",
+    "badge": "Reviewer • LTO",
+    "description": "Master the LTO exam with custom exams and offline mock tests."
+  },
+  {
     "id": "gwa-calculator",
     "name": "GWA Calculator PH",
     "badge": "Calculator • GWA",
