@@ -8,7 +8,7 @@
   // links work the same from /, /apps/ and /apps/<id>/.
   var ROOT = new URL("../", document.currentScript.src).href;
   var EMAIL = "aymorato.apps@gmail.com";
-  var GITHUB = "https://github.com/alwinmorato";
+  var GITHUB = "https://github.com/aymorato";
   var REPO = "aymorato/aymorato-apps";
   var THEME_KEY = "aymorato:theme";
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
