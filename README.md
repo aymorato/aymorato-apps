@@ -7,9 +7,11 @@ Contact: aymorato.apps@gmail.com
 
 A static website made of plain HTML, CSS and a little JavaScript. It has no build step and no dependencies, so it runs on GitHub Pages as soon as you upload it.
 
-Every page shares `css/style.css` and `js/main.js`. The app cards on the homepage and on `apps/index.html` are built from `apps.json`, so a local preview needs a web server (for example VS Code Live Server); opening `index.html` straight from disk won't load the cards.
+Every page shares `css/style.css` and `js/main.js`. Everything that lists apps is built from `apps.json`: the app tiles on the homepage and `apps/index.html`, the footer app links, the command palette and the hero terminal. A local preview therefore needs a web server (for example VS Code Live Server); opening `index.html` straight from disk won't load the apps.
 
-**Design system:** Ink `#0F172A` · Cobalt `#1E40AF` · Amber `#F59E0B` · Backgrounds `#F8FAFC` / `#F1F5F9` · Inter font.
+**Design system:** Navy `#0F172A` · Android green `#3DDC84` · dark-first, with a light theme toggle · Geist (UI) + JetBrains Mono (code, labels) · dot grid, bento tiles, terminal UI.
+
+**Built-in extras:** press <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd><kbd>K</kbd> on Mac) or <kbd>/</kbd> on any page for the command palette. The homepage terminal takes commands (`help`, `ls`, `open lto`, `doctor`, `contact`, `theme`). The git log tile is static, display-only text in `index.html`; edit it there.
 
 ---
 
@@ -17,14 +19,14 @@ Every page shares `css/style.css` and `js/main.js`. The app cards on the homepag
 
 ```
 aymorato-apps/
-├── index.html               Homepage (hero, trust badges, apps grid)
-├── apps.json                App list used to build the app cards
+├── index.html               Homepage (hero + terminal, apps bento, studio bento, contact)
+├── apps.json                App list: tiles, footer links, palette and terminal
 ├── privacy-policy.html      Older CSC Mastery privacy policy (kept so existing links keep working)
 ├── terms.html               Terms of Use (general, all apps)
 ├── contact.html             Contact page
 ├── .nojekyll                Tells GitHub Pages to serve files as-is
 ├── css/style.css            All styles (colors are set in :root)
-├── js/main.js               Mobile menu toggle + app cards from apps.json
+├── js/main.js               Theme, menu, app tiles, command palette, terminal, clock
 ├── assets/
 │   ├── logo/
 │   │   ├── aymorato_final_colored_white_bg.png   Original logo (1600×1600)
@@ -94,17 +96,23 @@ https://aymorato.github.io/aymorato-apps/apps/gwa-calculator/privacy.html
 1. Copy `apps/gwa-calculator/` to `apps/your-new-app/`.
 2. Put the new app's icon at `assets/your-new-app/app_icon.png` and screenshots in `assets/your-new-app/screenshots/`.
 3. In `apps/your-new-app/index.html` and `privacy.html`, change the name, text, image paths, `<title>` and canonical URL.
-4. Add an entry to `apps.json` (`id` must match the folder name). The cards on the homepage and the All Apps page update automatically.
+4. Add an entry to `apps.json` (`id` must match the folder name). The homepage tiles, All Apps page, footer links, command palette and terminal all update automatically. Fields:
+   - `id`, `name`, `badge`, `description`: required.
+   - `short`: short name for the footer, palette and terminal (falls back to `name`).
+   - `tagline`: one-line summary shown by `ls` in the terminal.
+   - `specs`: up to 3 or 4 `"label": "value"` pairs shown on the tile, for example `"questions": "1,100"`.
+   - `play`: Google Play URL. Leave it `""` while the app isn't published; the tile then shows "Google Play · soon".
 5. Add it to the `<noscript>` list in `index.html`.
 6. Commit and push. GitHub Pages updates in about a minute.
 
 ## When an app goes live on Google Play
 
-In `apps/<id>/index.html`, find the `TODO` comment by the Play Store button. Set its `href` to the Play Store link, remove `aria-disabled="true"`, and change the label to "Get it on Google Play".
+1. In `apps.json`, set the app's `play` field to its Play Store URL. The tile's status chip becomes a "Google Play ↗" link.
+2. In `apps/<id>/index.html`, find the `TODO` comment by the Play Store button. Set its `href` to the Play Store link, remove `aria-disabled="true"`, and change the label to "Get it on Google Play".
 
 ## Change the theme
 
-Colors are CSS variables at the top of `css/style.css`.
+Colors are CSS variables at the top of `css/style.css`: `:root` holds the dark (default) theme and `:root[data-theme="light"]` overrides it for light mode. A visitor's choice is saved in `localStorage` under `aymorato:theme`.
 
 ---
 

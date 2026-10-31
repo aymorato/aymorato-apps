@@ -2,25 +2,57 @@
   {
     "id": "csc-mastery",
     "name": "CSC Mastery: Exam Reviewer",
+    "short": "CSC Mastery",
     "badge": "Reviewer • CSC",
-    "description": "Civil Service Exam reviewer: 1,100 questions, mock exams and explanations."
+    "tagline": "Civil Service Exam reviewer",
+    "description": "Civil Service Exam reviewer: 1,100 questions, mock exams and explanations.",
+    "specs": {
+      "questions": "1,100",
+      "categories": "6",
+      "mock exam": "up to 170 items"
+    },
+    "play": ""
   },
   {
     "id": "let-reviewer",
     "name": "LET Reviewer - LPT Board Exam",
+    "short": "LET Reviewer",
     "badge": "Reviewer • LET",
-    "description": "LET reviewer with 1,100 questions and rationales. Pass the board exam!"
+    "tagline": "LET board exam reviewer",
+    "description": "LET reviewer with 1,100 questions and rationales. Pass the board exam!",
+    "specs": {
+      "questions": "1,100",
+      "gen ed / prof ed": "500 / 600",
+      "mock exam": "100 items · 2 hrs"
+    },
+    "play": ""
   },
   {
     "id": "lto-reviewer",
     "name": "LTO Reviewer: Exam Reviewer",
+    "short": "LTO Reviewer",
     "badge": "Reviewer • LTO",
-    "description": "Master the LTO exam with custom exams and offline mock tests."
+    "tagline": "LTO license exam reviewer",
+    "description": "Master the LTO exam with custom exams and offline mock tests.",
+    "specs": {
+      "questions": "1,000 + 150 pro",
+      "road signs": "190+",
+      "language": "English / Filipino"
+    },
+    "play": ""
   },
   {
     "id": "gwa-calculator",
     "name": "GWA Calculator PH",
+    "short": "GWA Calculator",
     "badge": "Calculator • GWA",
-    "description": "Offline GWA calculator for PH students with Latin honors and what-if grades."
+    "tagline": "GWA + Latin honors calculator",
+    "description": "Offline GWA calculator for PH students with Latin honors and what-if grades.",
+    "specs": {
+      "grading": "1.0 – 5.0",
+      "honors check": "Summa · Magna · Cum Laude",
+      "works offline": "yes"
+    },
+    "play": ""
   }
 ]
