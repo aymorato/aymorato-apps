@@ -33,19 +33,19 @@ aymorato-apps/
 │   │   ├── logo-512.png     Cropped logo for large uses
 │   │   ├── logo-192.png     Header, footer, app card, apple-touch-icon
 │   │   └── logo-64.png      Favicon
-│   ├── csc-mastery/         app_icon.png, feature_graphic.jpg, screenshots/
-│   ├── let-reviewer/        app_icon.png, feature_graphic.png, screenshots/
-│   └── gwa-calculator/      app_icon.png, feature_graphic.png, screenshots/
+│   └── <id>/                app_icon.png, feature_graphic.(png|jpg), screenshots/ for each app
 └── apps/
     ├── index.html           List of all apps (cards from apps.json)
-    └── <id>/                csc-mastery, let-reviewer, gwa-calculator
+    └── <id>/                csc-mastery, let-reviewer, lto-reviewer, gwa-calculator,
+                             studycalc-pro, builderpro, lista-mo
         ├── index.html       App page: 1 About, 2 Screenshots, 3 Privacy summary
         └── privacy.html     "Privacy Policy for <App Name>"
 ```
 
 ### Where the content came from
 
-- All three `apps/<id>/privacy.html` pages use the same shared policy text; only the app name changes.
+- The four reviewer/GWA `apps/<id>/privacy.html` pages use the same shared policy text; only the app name changes.
+- StudyCalc Pro, BuilderPro and Lista Mo use their own policy text from each app's `play_store_assets` (`privacy_policy.txt`), because their permissions and data differ.
 - About text comes from each app's `play_store_assets` (`about_this_app.txt` / `store_listing/`).
 - Icons and screenshots were copied from each app's `play_store_assets` folder.
 - `terms.html` is a **general template** written for this site and was not in your assets. Read it and change it to suit you before you publish.
@@ -86,7 +86,11 @@ In **Play Console → App content → Privacy policy**, use:
 ```
 https://aymorato.github.io/aymorato-apps/apps/csc-mastery/privacy.html
 https://aymorato.github.io/aymorato-apps/apps/let-reviewer/privacy.html
+https://aymorato.github.io/aymorato-apps/apps/lto-reviewer/privacy.html
 https://aymorato.github.io/aymorato-apps/apps/gwa-calculator/privacy.html
+https://aymorato.github.io/aymorato-apps/apps/studycalc-pro/privacy.html
+https://aymorato.github.io/aymorato-apps/apps/builderpro/privacy.html
+https://aymorato.github.io/aymorato-apps/apps/lista-mo/privacy.html
 ```
 
 ---

@@ -5,9 +5,9 @@
     "short": "CSC Mastery",
     "badge": "Reviewer • CSC",
     "tagline": "Civil Service Exam reviewer",
-    "description": "Civil Service Exam reviewer: 1,100 questions, mock exams and explanations.",
+    "description": "Civil Service Exam reviewer: 2,200 questions, mock exams and explanations.",
     "specs": {
-      "questions": "1,100",
+      "questions": "2,200",
       "categories": "6",
       "mock exam": "up to 170 items"
     },
@@ -15,14 +15,14 @@
   },
   {
     "id": "let-reviewer",
-    "name": "LET Reviewer - LPT Board Exam",
+    "name": "LET Reviewer 2027 (Unofficial)",
     "short": "LET Reviewer",
     "badge": "Reviewer • LET",
     "tagline": "LET board exam reviewer",
-    "description": "LET reviewer with 1,100 questions and rationales. Pass the board exam!",
+    "description": "Unofficial LET reviewer: 7,200 Gen Ed, Prof Ed, TLE & MAPEH questions, offline.",
     "specs": {
-      "questions": "1,100",
-      "gen ed / prof ed": "500 / 600",
+      "questions": "7,200",
+      "majors": "TLE · PE / MAPEH",
       "mock exam": "100 items · 2 hrs"
     },
     "play": ""
@@ -51,6 +51,48 @@
     "specs": {
       "grading": "1.0 – 5.0",
       "honors check": "Summa · Magna · Cum Laude",
+      "works offline": "yes"
+    },
+    "play": ""
+  },
+  {
+    "id": "studycalc-pro",
+    "name": "StudyCalc Pro",
+    "short": "StudyCalc Pro",
+    "badge": "Calculator • Scientific",
+    "tagline": "Scientific calculator + grapher",
+    "description": "Offline scientific calculator with graphs, formulas and step-by-step explanations.",
+    "specs": {
+      "formulas": "70",
+      "graphing": "roots · f′(x)",
+      "works offline": "yes"
+    },
+    "play": ""
+  },
+  {
+    "id": "builderpro",
+    "name": "BuilderPro: Estimates & Costs",
+    "short": "BuilderPro",
+    "badge": "Calculator • Construction",
+    "tagline": "Construction cost estimator",
+    "description": "Construction estimator: materials, costs, projects and PDF reports. Fully offline.",
+    "specs": {
+      "estimators": "8",
+      "price templates": "9",
+      "works offline": "yes"
+    },
+    "play": ""
+  },
+  {
+    "id": "lista-mo",
+    "name": "Lista Mo - Utang Tracker",
+    "short": "Lista Mo",
+    "badge": "Tracker • Sari-Sari",
+    "tagline": "Utang ledger + sari-sari POS",
+    "description": "Offline utang ledger and sari-sari POS. No login. Data stays on your phone.",
+    "specs": {
+      "free tier": "20 customers",
+      "language": "Tagalog / English",
       "works offline": "yes"
     },
     "play": ""
