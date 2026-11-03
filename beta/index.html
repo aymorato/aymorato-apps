@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0F172A">
+  <title>Beta Program | AYMORATO Apps</title>
+  <meta name="description" content="From side project to Play Store. Join the AYMorato Apps beta program and help test early builds on Google Play.">
+  <link rel="canonical" href="https://aymorato.github.io/aymorato-apps/beta/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Beta Program | AYMORATO Apps">
+  <meta property="og:description" content="From side project to Play Store. Help test early builds.">
+  <meta property="og:url" content="https://aymorato.github.io/aymorato-apps/beta/">
+  <meta property="og:image" content="https://aymorato.github.io/aymorato-apps/assets/logo/logo-512.png?v=20261031">
+  <link rel="icon" type="image/png" href="../assets/logo/logo-64.png?v=20261031">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("aymorato:theme")||"dark"}catch(e){}</script>
+  <link rel="stylesheet" href="../css/style.css?v=20261103">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="brand" href="../" aria-label="AYMorato Apps home">
+        <img src="../assets/logo/logo-64.png?v=20261031" alt="" width="32" height="32">
+        <span>AYMorato<span class="brand-repo">apps</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../#apps"><span>./</span>apps</a></li>
+        <li><a href="../#studio"><span>./</span>studio</a></li>
+        <li><a href="./" aria-current="page"><span>./</span>beta</a></li>
+        <li><a href="../contact.html"><span>./</span>contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="search-btn" type="button" data-cmdk aria-label="Search the site">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span class="search-label">Search</span>
+          <kbd><span class="kbd-mod">Ctrl</span> K</kbd>
+        </button>
+        <button class="icon-btn theme-toggle" type="button" aria-label="Dark theme" aria-pressed="true">
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z"/></svg>
+        </button>
+        <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="beta-head">
+      <div class="container">
+        <div class="breadcrumb"><a href="../">Home</a> / Beta</div>
+        <p class="kicker">04 / beta</p>
+        <h1>Beta Program</h1>
+        <p class="lead">From side project to Play Store. Help test early builds.</p>
+      </div>
+    </section>
+
+    <section class="section" id="join" aria-labelledby="join-title">
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <p class="kicker">04.1 / join</p>
+            <h2 id="join-title">How to join</h2>
+          </div>
+          <p>Three steps, about two minutes. You get new builds before everyone else, straight from Google Play.</p>
+        </header>
+
+        <div class="bento beta-join">
+          <article class="tile t-steps">
+            <p class="tile-label"><span>~/beta/README.md</span><span>md</span></p>
+            <ol class="steps">
+              <li>
+                <h3>Join the Google Group</h3>
+                <p>Use the same Google account you use on the Play Store. Membership is what unlocks the beta builds.</p>
+                <a class="btn btn-primary btn-sm" href="https://groups.google.com/g/aymorato-apps-tester" target="_blank" rel="noopener">Join Google Group ↗</a>
+              </li>
+              <li>
+                <h3>Pick your apps</h3>
+                <p>Choose apps below. Tap <strong>Web opt-in</strong> on a laptop, or <strong>Play Store beta</strong> on your phone, then install or update the app.</p>
+              </li>
+              <li>
+                <h3>Leave anytime</h3>
+                <p>Open the app in the Play Store, scroll to <kbd>Beta program</kbd> and tap <kbd>Leave</kbd>. You go back to the public version.</p>
+              </li>
+            </ol>
+          </article>
+
+          <article class="tile is-dark t-code">
+            <p class="tile-label"><span>lib/beta/program.dart</span><span>dart</span></p>
+            <div class="code">
+<pre class="gutter" aria-hidden="true">1
+2
+3
+4
+5
+6
+7
+8
+9</pre>
+<pre class="src"><code><span class="tk-c">// What you sign up for.</span>
+<span class="tk-k">const</span> beta = <span class="tk-t">BetaProgram</span>(
+  <span class="tk-p">group</span>: <span class="tk-s">'aymorato-apps-tester'</span>,
+  <span class="tk-p">builds</span>: <span class="tk-t">Track</span>.early,     <span class="tk-c">// before public release</span>
+  <span class="tk-p">feedback</span>: <span class="tk-t">Channel</span>.email, <span class="tk-c">// aymorato.apps@gmail.com</span>
+  <span class="tk-p">cost</span>: <span class="tk-t">Price</span>.free,
+  <span class="tk-p">leave</span>: <span class="tk-t">Anytime</span>(),
+);
+<span class="tk-k">void</span> <span class="tk-f">main</span>() =&gt; beta.<span class="tk-f">join</span>();</code></pre>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beta-apps" aria-labelledby="beta-apps-title">
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <p class="kicker">04.2 / apps</p>
+            <h2 id="beta-apps-title">Apps in testing</h2>
+          </div>
+          <p>Join the group first, then opt in to each app you want to test. Apps marked "soon" open for testing once they reach the Play Console.</p>
+        </header>
+
+        <div class="bento beta-grid">
+          <article class="tile app-tile beta-card">
+            <div class="app-top">
+              <img class="app-icon" src="../assets/beta/gwa-calculator.png" alt="" width="56" height="56" loading="lazy">
+              <div>
+                <h3><a href="../apps/gwa-calculator/">GWA Calculator PH</a></h3>
+                <p class="beta-pkg">com.aymorato.gwacalculatorph</p>
+              </div>
+              <span class="status is-open">beta open</span>
+            </div>
+            <div class="btn-row">
+              <a class="btn btn-ghost btn-sm" href="https://play.google.com/apps/testing/com.aymorato.gwacalculatorph" target="_blank" rel="noopener">Web opt-in ↗</a>
+              <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.aymorato.gwacalculatorph" target="_blank" rel="noopener">Play Store beta ↗</a>
+            </div>
+          </article>
+
+          <article class="tile app-tile beta-card">
+            <div class="app-top">
+              <img class="app-icon" src="../assets/beta/let-reviewer.png" alt="" width="56" height="56" loading="lazy">
+              <div>
+                <h3><a href="../apps/let-reviewer/">LET Reviewer</a></h3>
+                <p class="beta-pkg">com.aymorato.letreviewer</p>
+              </div>
+              <span class="status is-open">beta open</span>
+            </div>
+            <div class="btn-row">
+              <a class="btn btn-ghost btn-sm" href="https://play.google.com/apps/testing/com.aymorato.letreviewer" target="_blank" rel="noopener">Web opt-in ↗</a>
+              <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.aymorato.letreviewer" target="_blank" rel="noopener">Play Store beta ↗</a>
+            </div>
+          </article>
+
+          <article class="tile app-tile beta-card">
+            <div class="app-top">
+              <img class="app-icon" src="../assets/beta/lto-reviewer.png" alt="" width="56" height="56" loading="lazy">
+              <div>
+                <h3><a href="../apps/lto-reviewer/">LTO Reviewer</a></h3>
+                <p class="beta-pkg">com.aymorato.ltoreviewer</p>
+              </div>
+              <span class="status is-open">beta open</span>
+            </div>
+            <div class="btn-row">
+              <a class="btn btn-ghost btn-sm" href="https://play.google.com/apps/testing/com.aymorato.ltoreviewer" target="_blank" rel="noopener">Web opt-in ↗</a>
+              <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.aymorato.ltoreviewer" target="_blank" rel="noopener">Play Store beta ↗</a>
+            </div>
+          </article>
+
+          <article class="tile app-tile beta-card">
+            <div class="app-top">
+              <img class="app-icon" src="../assets/beta/csc-mastery.png" alt="" width="56" height="56" loading="lazy">
+              <div>
+                <h3><a href="../apps/csc-mastery/">CSC Mastery</a></h3>
+                <p class="beta-pkg">com.aymorato.cscmastery</p>
+              </div>
+              <span class="status is-open">beta open</span>
+            </div>
+            <div class="btn-row">
+              <a class="btn btn-ghost btn-sm" href="https://play.google.com/apps/testing/com.aymorato.cscmastery" target="_blank" rel="noopener">Web opt-in ↗</a>
+              <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.aymorato.cscmastery" target="_blank" rel="noopener">Play Store beta ↗</a>
+            </div>
+          </article>
+
+          <article class="tile app-tile beta-card">
+            <div class="app-top">
+              <img class="app-icon" src="../assets/beta/builderpro.png" alt="" width="56" height="56" loading="lazy">
+              <div>
+                <h3><a href="../apps/builderpro/">Builder Pro</a></h3>
+                <p class="beta-pkg">com.aymorato.builderpro</p>
+              </div>
+              <span class="status">soon</span>
+            </div>
+            <div class="btn-row">
+              <span class="btn btn-sm" aria-disabled="true">Web opt-in · coming soon</span>
+              <span class="btn btn-sm" aria-disabled="true">Play Store beta · coming soon</span>
+            </div>
+          </article>
+
+          <article class="tile app-tile beta-card">
+            <div class="app-top">
+              <img class="app-icon" src="../assets/beta/studycalc-pro.png" alt="" width="56" height="56" loading="lazy">
+              <div>
+                <h3><a href="../apps/studycalc-pro/">StudyCalc Pro</a></h3>
+                <p class="beta-pkg">com.aymorato.studycalcpro</p>
+              </div>
+              <span class="status">soon</span>
+            </div>
+            <div class="btn-row">
+              <span class="btn btn-sm" aria-disabled="true">Web opt-in · coming soon</span>
+              <span class="btn btn-sm" aria-disabled="true">Play Store beta · coming soon</span>
+            </div>
+          </article>
+
+          <article class="tile app-tile beta-card">
+            <div class="app-top">
+              <img class="app-icon" src="../assets/beta/lista-mo.png" alt="" width="56" height="56" loading="lazy">
+              <div>
+                <h3><a href="../apps/lista-mo/">Lista Mo - Sari-Sari Utang Tracker</a></h3>
+                <p class="beta-pkg">com.aymorato.listamo</p>
+              </div>
+              <span class="status">soon</span>
+            </div>
+            <div class="btn-row">
+              <span class="btn btn-sm" aria-disabled="true">Web opt-in · coming soon</span>
+              <span class="btn btn-sm" aria-disabled="true">Play Store beta · coming soon</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cli" aria-labelledby="cli-title">
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <p class="kicker">04.3 / cli</p>
+            <h2 id="cli-title">The short version</h2>
+          </div>
+          <p>Found a bug? Email <a href="mailto:aymorato.apps@gmail.com?subject=Beta%20feedback">aymorato.apps@gmail.com</a> with the app name, your phone model and Android version.</p>
+        </header>
+
+        <div class="term term-static">
+          <div class="term-bar">
+            <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="term-title">alwin@albay: ~/aymorato/beta</span>
+            <span class="term-tag">zsh</span>
+          </div>
+          <div class="term-body">
+<pre><span class="t-user">alwin@albay</span><span class="t-dim">:</span><span class="t-path">~/aymorato</span><span class="t-dim">$</span> beta join --all
+<span class="t-ok">&gt;</span> Joined <a class="t-link" href="https://groups.google.com/g/aymorato-apps-tester" target="_blank" rel="noopener">aymorato-apps-tester</a>
+<span class="t-ok">&gt;</span> 7 apps available</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../" aria-label="AYMorato Apps home">
+          <img src="../assets/logo/logo-64.png?v=20261031" alt="" width="32" height="32">
+          <span>AYMorato<span class="brand-repo">apps</span></span>
+        </a>
+        <p>We build quality apps for you. An indie Flutter studio in Albay, Philippines.</p>
+      </div>
+      <nav class="footer-col" aria-label="Apps">
+        <h3>apps</h3>
+        <ul data-app-links>
+          <li><a href="../apps/">All apps →</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Site">
+        <h3>site</h3>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="./">Beta program</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../terms.html">Terms of Use</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h3>connect</h3>
+        <ul>
+          <li><a href="mailto:aymorato.apps@gmail.com">Email</a></li>
+          <li><a href="https://github.com/aymorato" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/aymorato/aymorato-apps" target="_blank" rel="noopener">Site source</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="statusbar">
+      <div class="container statusbar-inner">
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>main</span>
+        <span class="sb-optional"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>0 problems</span>
+        <span class="sb-push" aria-hidden="true"></span>
+        <span class="sb-optional">Albay, PH · <span data-clock>--:--</span> PHT</span>
+        <span class="sb-optional">UTF-8</span>
+        <span>© 2026 AYMorato Apps</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js?v=20261031b"></script>
+</body>
+
+</html>

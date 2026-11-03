@@ -24,6 +24,7 @@ aymorato-apps/
 ├── privacy-policy.html      Older CSC Mastery privacy policy (kept so existing links keep working)
 ├── terms.html               Terms of Use (general, all apps)
 ├── contact.html             Contact page
+├── beta/index.html          Beta program (Google Group + Play testing links, static cards)
 ├── .nojekyll                Tells GitHub Pages to serve files as-is
 ├── css/style.css            All styles (colors are set in :root)
 ├── js/main.js               Theme, menu, app tiles, command palette, terminal, clock
