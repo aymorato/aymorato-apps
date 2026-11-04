@@ -295,6 +295,7 @@
       { group: "Pages", glyph: "/", label: "Home", hint: "/", run: go(ROOT) },
       { group: "Pages", glyph: "/", label: "All apps", hint: "/apps", run: go(ROOT + "apps/") },
       { group: "Pages", glyph: "/", label: "Studio", hint: "/#studio", run: go(ROOT + "#studio") },
+      { group: "Pages", glyph: "/", label: "Beta program", hint: "/beta", run: go(ROOT + "beta/") },
       { group: "Pages", glyph: "/", label: "Contact", hint: "/contact", run: go(ROOT + "contact.html") },
       { group: "Pages", glyph: "/", label: "Terms of Use", hint: "/terms", run: go(ROOT + "terms.html") },
       { group: "Actions", glyph: ">", label: "Toggle light / dark theme", hint: "theme", run: toggleTheme },
@@ -310,7 +311,7 @@
         var privacyEntries = apps.map(function (app) {
           return { group: "Privacy policies", glyph: "§", label: (app.short || app.name) + " privacy policy", hint: app.id, run: go(appUrl(app) + "privacy.html") };
         });
-        entries = appEntries.concat(entries.slice(0, 5), privacyEntries, entries.slice(5));
+        entries = appEntries.concat(entries.slice(0, 6), privacyEntries, entries.slice(6));
         if (dialog.open) render();
       })
       .catch(function () {});
@@ -417,6 +418,213 @@
     });
     document.querySelectorAll("[data-cmdk]").forEach(function (btn) {
       btn.addEventListener("click", open);
+    });
+  }
+
+  /* App screenshots: looping strip + in-page viewer ------------------------ */
+
+  function two(n) {
+    return String(n).padStart(2, "0");
+  }
+
+  function buildShotViewer() {
+    var dialog = document.createElement("dialog");
+    dialog.className = "shot-viewer";
+    dialog.setAttribute("aria-label", "Screenshot viewer");
+    dialog.innerHTML =
+      '<button class="icon-btn shot-close" type="button" aria-label="Close">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>' +
+      '<button class="icon-btn" type="button" data-dir="-1" aria-label="Previous screenshot">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>' +
+      '<figure class="shot-figure"><img alt="">' +
+        '<figcaption aria-live="polite"><span class="shot-count"></span><span class="shot-cap"></span></figcaption></figure>' +
+      '<button class="icon-btn" type="button" data-dir="1" aria-label="Next screenshot">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>';
+    document.body.appendChild(dialog);
+
+    var img = dialog.querySelector(".shot-figure img");
+    var count = dialog.querySelector(".shot-count");
+    var cap = dialog.querySelector(".shot-cap");
+    var list = [];
+    var at = 0;
+    var startX = null;
+
+    function show(i) {
+      at = (i + list.length) % list.length;
+      var thumb = list[at].querySelector("img");
+      img.src = list[at].href;
+      img.alt = thumb ? thumb.alt : "";
+      cap.textContent = img.alt;
+      count.textContent = two(at + 1) + " / " + two(list.length);
+    }
+
+    dialog.addEventListener("click", function (e) {
+      var nav = e.target.closest("[data-dir]");
+      if (nav) show(at + Number(nav.getAttribute("data-dir")));
+      else if (e.target.closest(".shot-close") || !e.target.closest("button, img, figcaption")) dialog.close();
+    });
+    dialog.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") show(at + 1);
+      else if (e.key === "ArrowLeft") show(at - 1);
+    });
+    dialog.addEventListener("touchstart", function (e) {
+      startX = e.touches.length === 1 ? e.touches[0].clientX : null;
+    }, { passive: true });
+    dialog.addEventListener("touchend", function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      startX = null;
+      if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1));
+    });
+
+    return function open(links, i) {
+      list = links;
+      show(i);
+      dialog.showModal();
+      dialog.querySelector(".shot-close").focus();
+    };
+  }
+
+  // Scrolls the strip slowly and forever. Copies of the screenshots are appended
+  // so the loop is seamless; it pauses while the strip is hovered, focused or
+  // touched, and can still be swiped / scrolled by hand.
+  function loopStrip(strip, links, onOpen) {
+    var SPEED = 28; // px per second
+    var copies = [];
+    var hover = false;
+    var focused = false;
+    var holdUntil = 0;
+    var visible = true;
+    var pos = 0;
+    var last = 0;
+    var raf = 0;
+
+    function addCopy() {
+      links.forEach(function (link, i) {
+        var copy = link.cloneNode(true);
+        copy.setAttribute("aria-hidden", "true");
+        copy.setAttribute("tabindex", "-1");
+        copy.addEventListener("click", function (e) { onOpen(e, i); });
+        strip.appendChild(copy);
+        copies.push(copy);
+      });
+    }
+
+    // Width of one full set of screenshots (including the gap after it).
+    function span() {
+      return copies[0].offsetLeft - links[0].offsetLeft;
+    }
+
+    // Enough copies that the view never runs out while pos sits in [span, 2*span).
+    function fill() {
+      if (!copies.length) addCopy();
+      while (strip.scrollWidth < 2 * span() + strip.clientWidth && copies.length < links.length * 8) addCopy();
+    }
+
+    function wrap() {
+      var loop = span();
+      if (loop <= 0) return;
+      if (pos < loop) pos += loop;
+      else if (pos >= 2 * loop) pos -= loop;
+    }
+
+    // The "auto-scroll / paused" pill in the panel's window bar.
+    var panel = strip.closest(".shots");
+    var status = panel && panel.querySelector(".shots-status");
+    var wasPaused = null;
+    if (status) status.hidden = false;
+
+    function setPaused(paused) {
+      if (paused === wasPaused || !panel) return;
+      wasPaused = paused;
+      panel.toggleAttribute("data-paused", paused);
+      if (status) status.textContent = paused ? "paused" : "auto-scroll";
+    }
+
+    function tick(t) {
+      var dt = last ? Math.min(t - last, 64) : 0;
+      last = t;
+      var paused = hover || focused || Date.now() <= holdUntil;
+      setPaused(paused);
+      if (!paused) {
+        pos += (SPEED * dt) / 1000;
+        wrap();
+        strip.scrollLeft = pos;
+      }
+      raf = requestAnimationFrame(tick);
+    }
+
+    function run() {
+      if (!raf && visible && !document.hidden) { last = 0; raf = requestAnimationFrame(tick); }
+    }
+
+    function halt() {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    }
+
+    fill();
+    strip.classList.add("is-looping");
+    pos = span();
+    strip.scrollLeft = pos;
+
+    // Manual scrolling: follow it, and keep it inside the seamless range.
+    strip.addEventListener("scroll", function () {
+      if (Math.abs(strip.scrollLeft - pos) < 1.5) return;
+      pos = strip.scrollLeft;
+      var before = pos;
+      wrap();
+      if (pos !== before) strip.scrollLeft = pos;
+    }, { passive: true });
+
+    strip.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") hover = true; });
+    strip.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") hover = false; });
+    // Only keyboard focus pauses; a tap or click shouldn't leave it stuck.
+    strip.addEventListener("focusin", function (e) {
+      try { focused = e.target.matches(":focus-visible"); } catch (err) { focused = true; }
+    });
+    strip.addEventListener("focusout", function () { focused = false; });
+    strip.addEventListener("touchstart", function () { holdUntil = Infinity; }, { passive: true });
+    strip.addEventListener("touchend", function () { holdUntil = Date.now() + 2500; }, { passive: true });
+    strip.addEventListener("wheel", function () { holdUntil = Date.now() + 2500; }, { passive: true });
+    window.addEventListener("resize", fill);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) halt();
+      else run();
+    });
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) run();
+        else halt();
+      }).observe(strip);
+    }
+    run();
+  }
+
+  function initShots() {
+    var strips = document.querySelectorAll(".shots-grid");
+    if (!strips.length) return;
+    var openViewer = typeof HTMLDialogElement === "function" ? buildShotViewer() : null;
+
+    strips.forEach(function (strip) {
+      var links = Array.prototype.slice.call(strip.querySelectorAll("a"));
+      if (!links.length) return;
+
+      // No new tab: open the in-page viewer (or the image in this tab as a fallback).
+      function onOpen(e, i) {
+        if (!openViewer) return;
+        e.preventDefault();
+        openViewer(links, i);
+      }
+      links.forEach(function (link, i) {
+        link.removeAttribute("target");
+        link.setAttribute("aria-label", "View screenshot: " + ((link.querySelector("img") || {}).alt || i + 1));
+        link.addEventListener("click", function (e) { onOpen(e, i); });
+      });
+
+      if (!reduceMotion) loopStrip(strip, links, onOpen);
     });
   }
 
@@ -650,6 +858,7 @@
   initSpotlight();
   initClock();
   initPalette();
+  initShots();
   initTerminal();
 
   try {
